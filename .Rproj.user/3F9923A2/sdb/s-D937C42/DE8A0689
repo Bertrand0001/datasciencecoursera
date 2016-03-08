@@ -1,0 +1,18 @@
+{
+    "contents" : "library(\"RCurl\")\nlibrary(\"rjson\")\n\n# Accept SSL certificates issued by public Certificate Authorities\noptions(RCurlOptions = list(cainfo = system.file(\"CurlSSL\", \"cacert.pem\", package = \"RCurl\")))\n\nh = basicTextGatherer()\nhdr = basicHeaderGatherer()\n\n\nreq = list(\n  \n  Inputs = list(\n    \n    \n    \"Données de base\" = list(\n      \"ColumnNames\" = list(\"Etudiants\", \"Note de mathematique\", \"Note de statistique\", \"Note de programmation\"),\n      \"Values\" = list( list( \"value\", \"0\", \"0\", \"0\" ),  list( \"value\", \"0\", \"0\", \"0\" )  )\n    )                ),\n  GlobalParameters = list(\n    \"Append score columns to output\" = \"\")\n)\n\nbody = enc2utf8(toJSON(req))\napi_key = \"WiCn7xSBiEEWy4pI2lhRgOFVo+w606g/q79PSzGi2h9lpElaLSrf4gbVSJiiS9oJIo1Lve6jMTKKs6zeo53Hdw==\" \nauthz_hdr = paste('Bearer', api_key, sep=' ')\n\nh$reset()\ncurlPerform(url = \"https://ussouthcentral.services.azureml.net/workspaces/b0a05c432d6044578030ff089252173f/services/2d011701e3954a8dbd3dba2e122d66fb/execute?api-version=2.0&details=true\",\n            httpheader=c('Content-Type' = \"application/json\", 'Authorization' = authz_hdr),\n            postfields=body,\n            writefunction = h$update,\n            headerfunction = hdr$update,\n            verbose = TRUE\n)\n\nheaders = hdr$value()\nhttpStatus = headers[\"status\"]\nif (httpStatus >= 400)\n{\n  print(paste(\"The request failed with status code:\", httpStatus, sep=\" \"))\n  \n  # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure\n  print(headers)\n}\n\nprint(\"Result:\")\nresult = h$value()\nprint(fromJSON(result))\n\n\n",
+    "created" : 1451504925106.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2989741884",
+    "id" : "DE8A0689",
+    "lastKnownWriteTime" : 1451505139,
+    "path" : "~/GitHub/datasciencecoursera/Web_Services.R",
+    "project_path" : "Web_Services.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "type" : "r_source"
+}

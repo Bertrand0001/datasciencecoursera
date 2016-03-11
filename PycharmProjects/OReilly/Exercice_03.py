@@ -1,0 +1,26 @@
+__author__ = 'bertr'
+
+#Converti l'entrée clavier en integer
+keyboardInput=str(input())
+#keyboardInput=input()
+print (keyboardInput)
+
+print("What is the name of the gift giver?")
+name = input()
+print("What is the present they gave you?")
+present = input()
+print("How old were you on your birthday?")
+age = int(input())
+print("What is your name?")
+yourName = input()
+print("Dear " + name + ", ")
+print("")
+print("Thank you for the " + present + ". ")
+print("I really like it. I can't believe ")
+print("I am already " + str(age) + " years old, but ")
+print("it does not feel much different than being ")
+print(str(age-1) + ".")
+print("")
+print("Sincerely,")
+print("")
+print(yourName)
